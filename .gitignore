@@ -1,0 +1,11 @@
+__pycache__/
+__promptpy__/
+dist/
+build/
+.venv
+
+__implementation__
+tmp.*
+*.swp
+*.egg-info
+logs.txt
