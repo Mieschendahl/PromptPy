@@ -1,23 +1,12 @@
 from gpt import model
-from promptpy import Prompter, Option
+from promptpy import Prompter
 
-while True:
-    message = input("Hi, who are you? ")
-    label, response = Prompter(model)\
-        .add_message("Hi, who are you?", role="assistant")\
+def translate(message: str) -> str:
+    return Prompter(model)\
+        .add_message("You are a translator", role="developer")\
+        .add_message("Return the user message in german and do nothing else", role="developer")\
         .add_message(message)\
-        .get_choice(
-            Option(
-                "give name",  # Label
-                "If the users responded with his name",  # Condition
-                "Write his name and nothing else"  # Action
-            ),
-            Option(
-                "no name",  # Label
-                "If the users did not respnod with his name"  # Condition
-            )
-        )
-    if label == "give name":
-        print(f"Hello '{response}'!")
-        print()
-        break
+        .get_response()
+
+print(f"'Hello' in german is '{translate("Hello")}'")  # prints "Hallo" (generated)
+print(f"'Hello' in german is '{translate("Hello")}'")  # prints "Hallo" (cached)5

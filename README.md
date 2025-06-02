@@ -3,23 +3,15 @@
 *PromptPy* is a python library that makes prompting LLMs easy.
 
 ```python
+# examples/example_01.py
 response = Prompter(model)\
-    .add_prompt("Translate any user input into german", role="developer")\
-    .add_prompt("Hello World!", role="user")\
-    .get_response()  # LLM's response
+    .add_message("Translate any user input into german", role="developer")\
+    .add_message("Hello World!", role="user")\
+    .get_response()  # get LLM's response
 print(response)  # prints "Hallo Welt!"
 ```
 
 ## Features
-
-*PromptPy's* main features are:
-
-* **Modular:** Use any LLM implementation
-* **Cheap & Fast:** Cache LLM responses
-* **Powerful:** Let the LLM generate conditional responses
-* **Transparent:** Log conversations in an easy to read format
-
-Let us look at some examples.
 
 ### Modular
 
@@ -28,10 +20,11 @@ See `examples/gpt.py` for an example implementation for *ChatGPT*.
 
 ### Cheap & Fast
 
-The `Model` class will cache LLM responses whenever possible instead of regenerating from scratch.
+The `Model` class will cache LLM responses whenever possible, which saves the time and money needed for regenerating responses from scratch.
 
 ```python
-def translate(message):
+# examples/example_02.py
+def translate(message: str) -> str:
     return Prompter(model)\
         .add_message("You are a translator", role="developer")\
         .add_message("Return the user message in german and do nothing else", role="developer")\
@@ -44,8 +37,9 @@ print(f"'Hello' in german is '{translate("Hello")}'")  # prints "Hallo" (cached)
 
 ### Powerful
 
-Use the `Option` class to make the next response of the LLM depend on the current situation.
+You can use the `Option` class to make the next response of the LLM depend on the current situation, giving you a powerful way to control the flow of your program and let the LLM use tools.
 ```python
+# examples/example_03.py
 while True:
     message = input("Hi, who are you? ")
     label, response = Prompter(model)\
@@ -68,11 +62,12 @@ while True:
         break
 ```
 
-### Transparent
+### Debugabble
 
-Create readable conversation logs for debugging and interactive prompting.
+You can easily create readable conversation logs for debugging.
 
 ```python
+# examples/example_04.py
 with open("logs.txt", "w") as log_file:
     question = input("Any english questions? ")
     response = Prompter(model, log_file=log_file, id="Teacher")\

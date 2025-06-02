@@ -8,4 +8,3 @@ tmp.*
 *.swp
 *.egg-info
 logs.txt
-__implementation__

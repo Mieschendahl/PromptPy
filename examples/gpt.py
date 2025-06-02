@@ -10,7 +10,8 @@ class GPT(Model):
     """ChatGPT implementation of an LLM."""
     
     def configure(self, **config: Any) -> "GPT":
-        """
+        """GPT constructor.
+    
         Args:
             api_key: The api key that should be passed to OpenAi for API access.
             config: Configuration that is passed to OpenAI's chat completion creation method.

@@ -1,10 +1,23 @@
 from gpt import model
-from promptpy import Prompter
+from promptpy import Prompter, Option
 
-with open("logs.txt", "w") as log_file:
-    question = input("Any english questions? ")
-    response = Prompter(model, log_file=log_file, id="Teacher")\
-        .add_message("You are an english teacher", role="developer")\
-        .add_message(question)\
-        .get_response()
-    print(response)
+while True:
+    message = input("Hi, who are you? ")
+    label, response = Prompter(model)\
+        .add_message("Hi, who are you?", role="assistant")\
+        .add_message(message)\
+        .get_choice(
+            Option(
+                "give name",  # Label
+                "If the users responded with his name",  # Condition
+                "Write his name and nothing else"  # Action
+            ),
+            Option(
+                "no name",  # Label
+                "If the users did not respnod with his name"  # Condition
+            )
+        )
+    if label == "give name":
+        print(f"Hello '{response}'!")
+        print()
+        break

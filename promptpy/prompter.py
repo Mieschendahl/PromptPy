@@ -17,7 +17,8 @@ class Prompter:
         Args:
             model: The model to be used for generating completions.
             messages: Messages from a previous conversation.
-            log_file: The file where to save the logs to, or None to not generate logs.
+            log_file: The file where to save the logs to, or None to not generate any logs.
+                Use sys.stdout for printing to stdout.
             allow_injections: Whether the prompter prompts the user for a message before letting the model generate a completion.
             id: The id for the Prompter, which  will be used for in the logs for readability.
         """
