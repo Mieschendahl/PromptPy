@@ -1,9 +1,9 @@
 # PromptPy
 
-*PromptPy* is a python library that makes prompting LLMs easy.
+*PromptPy* is a Python library that makes prompting LLMs easy.
 
 ```python
-# examples/example_01.py
+# examples/example_hello_world.py
 response = Prompter(model)\
     .add_message("Translate any user input into german", role="developer")\
     .add_message("Hello World!", role="user")\
@@ -15,7 +15,7 @@ print(response)  # prints "Hallo Welt!"
 
 ### Modular
 
-`promptpy` provides the abstract `Model` class as an interface to your custom LLM implementation.
+*PromptPy* provides the abstract `Model` class as an interface to your custom LLM implementation.
 See `examples/gpt.py` for an example implementation for *ChatGPT*.
 
 ### Cheap & Fast
@@ -23,7 +23,7 @@ See `examples/gpt.py` for an example implementation for *ChatGPT*.
 The `Model` class will cache LLM responses whenever possible, which saves the time and money needed for regenerating responses from scratch.
 
 ```python
-# examples/example_02.py
+# examples/example_translate.py
 def translate(message: str) -> str:
     return Prompter(model)\
         .add_message("You are a translator", role="developer")\
@@ -39,7 +39,7 @@ print(f"'Hello' in german is '{translate("Hello")}'")  # prints "Hallo" (cached)
 
 You can use the `Option` class to make the next response of the LLM depend on the current situation, giving you a powerful way to control the flow of your program and let the LLM use tools.
 ```python
-# examples/example_03.py
+# examples/example_user_name.py
 while True:
     message = input("Hi, who are you? ")
     label, response = Prompter(model)\
@@ -67,7 +67,7 @@ while True:
 You can easily create readable conversation logs for debugging.
 
 ```python
-# examples/example_04.py
+# examples/example_english_teacher.py
 with open("logs.txt", "w") as log_file:
     question = input("Any english questions? ")
     response = Prompter(model, log_file=log_file, id="Teacher")\
@@ -76,7 +76,7 @@ with open("logs.txt", "w") as log_file:
         .get_response()
     print(response)
 ```
-Contents of `logs.txt`
+Contents of `logs.txt`:
 ```
 PROMPTER ID: Teacher
 
@@ -92,10 +92,12 @@ ASSISTANT:
 
 ## Setup
 
-Using *PromptPy* requires three steps:
+- First install *PromptPy*.
 
-1. Run `pip install \path\to\this\project` to install the `promptpy` library <!-- -e for quick reloading -->
-2. Provide a `Model` class implementation (e.g. `example/gpt.py`)
-3. Import `promptpy` in your python code
+    ```bash
+    pip install --upgrade git+https://github.com/Mieschendahl/PromptPy.git
+    ```
 
-The `examples` directory demonstrates this process.
+- Then provide a `Model` class implementation (e.g. `examples/gpt.py`).
+
+The `examples` directory contains some examples.

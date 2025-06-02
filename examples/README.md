@@ -1,18 +1,31 @@
-# PromptPy Examples
+# Examples
 
-This directory contains examples (`example_XX.py`) that demonstrate how *PromptPy* can be used.
+This directory contains examples that demonstrate how *PromptPy* can be used.
 
-All of the examples use *ChatGPT* as the LLM implementation, although this can be changed by importing your own LLM implementation into the examples and removing the imports from `gpt.py`.
+All of the examples use *ChatGPT* as the LLM implementation, although this can be changed by importing your own LLM implementation into the examples and replacing the imports from `gpt.py`.
 
 ## Setup
 
-Manual setup:
-1. Run `pip install openai` to install the `openai` library
-2. Run `pip install \path\to\this\project` to install the `promptpy` library <!-- -e for quick reloading -->
-3. Run `export OPENAI_API_KEY=<your_api_key>` with a valid API key from OpenAI
-4. Run `python3 example_XX.py`
+1. Install *OpenAI* and *PromptPy*.
 
-Docker setup:
- 1. Run `python3 docker.py` to build and run the docker container
- 2. Run `export OPENAI_API_KEY=<your_api_key>` with a valid API key from OpenAI
- 3. Run `python3 example_XX.py`
+    ```bash
+    pip install --upgrade openai git+https://github.com/Mieschendahl/PromptPy.git
+    ```
+
+2. Set your [OpenAI API Key](https://platform.openai.com/api-keys).
+
+    ```bash
+    export OPENAI_API_KEY=<your_api_key>
+    ```
+
+3. Run an example.
+
+    ```bash
+    python3 example_<example_id>.py
+    ```
+
+- Alternatively, you can run the examples in a [Docker](https://www.docker.com/resources/what-container/) container.
+
+    ```bash
+    python3 docker.py
+    ```
