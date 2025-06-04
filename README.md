@@ -101,3 +101,5 @@ ASSISTANT:
 - Then provide a `Model` class implementation (e.g. `examples/gpt.py`).
 
 The `examples` directory contains some examples.
+
+You might also be interested in [*PromptGPT*](https://github.com/Mieschendahl/PromptGPT) which is a version of *PromptPy* that inherently supports *ChatGPT*.
