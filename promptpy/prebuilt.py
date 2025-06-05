@@ -1,4 +1,4 @@
-def clean_code(code: str, last: bool = True) -> str:
+def clean_code(code: str) -> str:
     """Removes delimiteres such as ```python ... ``` from a code snippet.
     
     Args:
@@ -8,12 +8,12 @@ def clean_code(code: str, last: bool = True) -> str:
         cleaned: The cleaned code.
     """
     lines = code.split("\n")
+    start = None
     for i, line in enumerate(lines):
         if "```" in line:
-            lines = lines[i+1:]
-            break
-    for i, line in enumerate(lines):
-        if "```" in line:
-            lines = lines[:i]
-            break
+            if start is not None:
+                return "\n".join(lines[start+1:i])
+            start = i
+    if start is not None:
+        lines = lines[:start] + lines[start+1:]
     return "\n".join(lines)

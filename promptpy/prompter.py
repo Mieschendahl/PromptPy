@@ -1,4 +1,4 @@
-from typing import Optional, TextIO
+from typing import Optional, TextIO, Self
 from promptpy.utils import random_str, pad
 from promptpy.message import Message
 from promptpy.model import Model
@@ -32,7 +32,7 @@ class Prompter:
         """Copies the Prompter."""
         return Prompter(self.model, self.messages, self.log_file, self.allow_injections, self.id)
 
-    def log_message(self, *messages: Message) -> "Prompter":
+    def log_message(self, *messages: Message) -> Self:
         """Logs the given messages to the log file.
         
         Args:
@@ -55,7 +55,7 @@ class Prompter:
         print(*logs, sep="", end="", file=self.log_file)
         return self
 
-    def _add_message(self, *messages: Message) -> "Prompter":
+    def _add_message(self, *messages: Message) -> Self:
         """Adds messages to the conversation.
 
         Args:
@@ -69,7 +69,7 @@ class Prompter:
             self.log_message(self.messages[-1])
         return self
     
-    def add_message(self, *messages: str, role="user") -> "Prompter":
+    def add_message(self, *messages: str, role="user") -> Self:
         """Adds messages to the conversation.
 
         Args:
@@ -81,7 +81,7 @@ class Prompter:
         """
         return self._add_message(*[Message(message, role) for message in messages])
 
-    def add_response(self, stop: Optional[str] = None) -> "Prompter":
+    def add_response(self, stop: Optional[str] = None) -> Self:
         """Adds a response from the LLM, based on the current messages.
         The user can manually inject a prompt before the LLM response is generated, if allow_injections is set to true.
 

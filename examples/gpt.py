@@ -37,5 +37,6 @@ class GPT(Model):
                 **self.config
             ).choices[0].message.content#
     
-model = GPT(use_cache=True, cache_path="__promptpy__")\
+model = GPT()\
+    .set_cache("__promptpy__")\
     .configure(model="gpt-4o-mini", temperature=0)
