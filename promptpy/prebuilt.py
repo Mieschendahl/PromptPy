@@ -3,13 +3,11 @@ def clean_code(code: str, last: bool = True) -> str:
     
     Args:
         code: The code snippet to clean.
-        last: If the last or the first code snippet should be extracted.
     
     Returns:
         cleaned: The cleaned code.
     """
     lines = code.split("\n")
-    lines = lines[::-1] if last else lines
     for i, line in enumerate(lines):
         if "```" in line:
             lines = lines[i+1:]
@@ -18,5 +16,4 @@ def clean_code(code: str, last: bool = True) -> str:
         if "```" in line:
             lines = lines[:i]
             break
-    lines = lines[::-1] if last else lines
     return "\n".join(lines)
