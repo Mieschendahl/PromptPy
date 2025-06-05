@@ -11,7 +11,7 @@ class Prompter:
     """A class for interacting with an LLM."""
     _last_id: Optional[str] = None
 
-    def __init__(self, model: Model, messages: Optional[list[Message]] = None, log_file: Optional[TextIO] = None, allow_injections: bool = False, id: Optional[str] = None):
+    def __init__(self, model: Model, log_file: Optional[TextIO] = None, allow_injections: bool = False, id: Optional[str] = None):
         """Prompter constructor.
         
         Args:
@@ -23,14 +23,16 @@ class Prompter:
             id: The id for the Prompter, which  will be used for in the logs for readability.
         """
         self.model = model
-        self.messages = [] if messages is None else messages
+        self.messages = []
         self.log_file = log_file
         self.allow_injections = allow_injections
         self.id = random_str() if id is None else id
     
     def copy(self) -> "Prompter":
         """Copies the Prompter."""
-        return Prompter(self.model, self.messages, self.log_file, self.allow_injections, self.id)
+        prompter = Prompter(self.model, self.log_file, self.allow_injections)
+        prompter._add_message(*self.messages)
+        return prompter
 
     def log_message(self, *messages: Message) -> Self:
         """Logs the given messages to the log file.
