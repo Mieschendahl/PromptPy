@@ -26,18 +26,21 @@ class Option:
         Returns:
             option_description: The description.
         """
-        action = f"\n2. {self.action}"
-        if self.action is None:
-            action = "\n2. Say nothing"
+        message = f"{self.condition}"
+        i = 1
 
-        effect = f"\n4. {self.effect}"
-        if self.effect is None:
-            effect = ""
+        message += f"\n{i}. You will write \"{self.label + seperator}\""
+        i += 1
 
-        return (
-            f"{self.condition}:"
-            f"\n1. You will write \"{self.label + seperator}\""
-            f"{action}"
-            f"\n3. You will write \"{stop}\""
-            f"{effect}"
-        )
+        if self.action is not None:
+            message += f"\n{i}. {self.action}"
+            i += 1
+        
+        message += f"\n{i}. You will write \"{stop}\""
+        i += 1
+            
+        if self.effect is not None:
+            message += f"\n{i}. {self.effect}"
+            i += 1
+
+        return message
